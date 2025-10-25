@@ -36,6 +36,15 @@ PRED = lambda n: lambda f: lambda x: n(\
 )(lambda _: x)(lambda i:i)
 # fmt: on
 
+# the trick is here
+# comp = lambda f: lambda g: lambda h: h(g(f))
+# cool = lambda f: THREE(comp(f))
+# cool = lambda f: lambda x: comp(f)(comp(f)(comp(f)(x)))
+# PRED_THREE = lambda f: lambda x: cool(f)(lambda _: x)(lambda i: i)
+# three instances of f and comp, but only two applications
+# since the innermost one is thrown out
+# really clever, but i have no idea how the guy came up with this
+
 SUB = lambda m: lambda n: n(PRED)(m)
 
 IS_ZERO = lambda n: n(lambda _: FALSE)(TRUE)
