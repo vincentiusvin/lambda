@@ -44,9 +44,15 @@ IS_ZERO = lambda n: n(lambda _: FALSE)(TRUE)
 # because we want to run this on demand, wrap it in another lambda
 # a pure implementation has no outer lambda though
 # LOOP = (lambda x: x(x))(lambda x: x(x))
+# beta reduces to itself!
 LOOP_FACTORY = lambda _: (lambda x: x(x))(lambda x: x(x))
 
-# Y = lambda f: lambda x: f(x)(x)
+Y = lambda f: (lambda x: f(x(x)))(lambda x: f(x(x)))
+# lets walk through the beta reduction of the Y combinator
+# (lambda x: f(x(x)))(lambda x: f(x(x)))
+# f (lambda x: f(x(x))( lambda x: f(x(x))))
+# f ( f ( lambda x: f(x(x)) (lambda x: f(x(x))) ) )
+# it keeps adding f in front. There we have recursion!
 
 
 def eval_bool(x):

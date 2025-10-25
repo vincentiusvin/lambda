@@ -92,6 +92,9 @@ class TestLoop(unittest.TestCase):
     def test_loop(self):
         self.assertRaises(RecursionError, lambda: main.LOOP_FACTORY(None))
 
+    def test_y(self):
+        self.assertRaises(RecursionError, lambda: main.Y(None))
+
 
 if __name__ == "__main__":
     unittest.main()
