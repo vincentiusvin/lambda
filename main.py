@@ -21,6 +21,12 @@ TIMES = lambda m: lambda n: lambda f: lambda x: m(n(f))(x)
 TEN = TIMES(TWO)(FIVE)
 HUNDRED = TIMES(TEN)(TEN)
 
+POWER = lambda m: lambda n: n(m)
+# understood it the following way:
+# POWER_3 = lambda f: lambda x: THREE(THREE(THREE(f)))(x)
+# POWER_3_2 = lambda f: lambda x: THREE(THREE)(f)(x)
+# compose three with three to get 3^3
+
 
 def eval_bool(x):
     return x(True)(False)
