@@ -63,6 +63,7 @@ Z = lambda f: (lambda x: f(lambda v: x(x)(v)))(lambda x: f(lambda v: x(x)(v)))
 
 
 # UNTIL_ZERO = lambda n: IS_ZERO(n)(TRUE)(UNTIL_ZERO(PRED(n)))
+#
 # UNTIL_ZERO_F = lambda f: lambda n: IS_ZERO(n)(TRUE)()
 #
 # above code overloads the stack because python is eager
@@ -72,6 +73,20 @@ Z = lambda f: (lambda x: f(lambda v: x(x)(v)))(lambda x: f(lambda v: x(x)(v)))
 # g becomes lambda x: g(x)
 UNTIL_ZERO_F = lambda f: lambda n: IS_ZERO(n)(TRUE)(lambda x: f(PRED(n))(x))
 UNTIL_ZERO = Z(UNTIL_ZERO_F)
+
+
+# FACTORIAL_F = lambda f: lambda n:\
+#     IS_ZERO(n)\
+#         (ONE)\
+#         (TIMES(n)( f(SUB(n)(ONE)) ))
+# again, need another eta expansion
+# fmt: off
+FACTORIAL_F = lambda f: lambda n:\
+    IS_ZERO(n)\
+        (ONE)\
+        (TIMES(n)( lambda x: f(SUB(n)(ONE))(x) ))
+# fmt: on
+FACTORIAL = Z(FACTORIAL_F)
 
 
 def eval_bool(x):

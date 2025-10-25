@@ -102,8 +102,20 @@ class TestLoop(unittest.TestCase):
         self.check_bool(main.UNTIL_ZERO(main.TWO), True)
         self.check_bool(main.UNTIL_ZERO(main.THREE), True)
 
+    def test_factorial(self):
+        self.check_num(main.FACTORIAL(main.ZERO), 1)
+        self.check_num(main.FACTORIAL(main.ONE), 1)
+        self.check_num(main.FACTORIAL(main.TWO), 2)
+        self.check_num(main.FACTORIAL(main.THREE), 6)
+        self.check_num(main.FACTORIAL(main.FOUR), 24)
+        self.check_num(main.FACTORIAL(main.FIVE), 120)
+
     def check_bool(self, inp, exp):
         out = main.eval_bool(inp)
+        self.assertEqual(exp, out)
+
+    def check_num(self, inp, exp):
+        out = main.eval_num(inp)
         self.assertEqual(exp, out)
 
 
