@@ -1,5 +1,6 @@
 import unittest
 import main
+import sys
 
 
 class TestBoolLambda(unittest.TestCase):
@@ -94,6 +95,16 @@ class TestLoop(unittest.TestCase):
 
     def test_y(self):
         self.assertRaises(RecursionError, lambda: main.Y(None))
+
+    def test_until_zero(self):
+        self.check_bool(main.UNTIL_ZERO(main.ZERO), True)
+        self.check_bool(main.UNTIL_ZERO(main.ONE), True)
+        self.check_bool(main.UNTIL_ZERO(main.TWO), True)
+        self.check_bool(main.UNTIL_ZERO(main.THREE), True)
+
+    def check_bool(self, inp, exp):
+        out = main.eval_bool(inp)
+        self.assertEqual(exp, out)
 
 
 if __name__ == "__main__":

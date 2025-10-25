@@ -28,9 +28,8 @@ POWER = lambda m: lambda n: n(m)
 # POWER_3_2 = lambda f: lambda x: THREE(THREE)(f)(x)
 # compose three with three to get 3^3
 
-SUCC = lambda n: lambda f: lambda x: f(n(f)(x))
-# key piece of insight is we supply a function that short circuits and forcibly returns x once
 
+# key piece of insight is we supply a function that short circuits and forcibly returns x once
 # fmt: off
 PRED = lambda n: lambda f: lambda x: n(\
     lambda g: lambda h: h(g(f))\
@@ -53,6 +52,26 @@ Y = lambda f: (lambda x: f(x(x)))(lambda x: f(x(x)))
 # f (lambda x: f(x(x))( lambda x: f(x(x))))
 # f ( f ( lambda x: f(x(x)) (lambda x: f(x(x))) ) )
 # it keeps adding f in front. There we have recursion!
+
+# the problem lies with x(x) which blows everything up
+# so we defer the evaluation of it
+# x is a function that takes one argument,
+# so we do something called an eta expansion
+# x ==becomes=> lambda v: x(v)
+# see: https://wiki.haskell.org/index.php?title=Eta_conversion
+Z = lambda f: (lambda x: f(lambda v: x(x)(v)))(lambda x: f(lambda v: x(x)(v)))
+
+
+# UNTIL_ZERO = lambda n: IS_ZERO(n)(TRUE)(UNTIL_ZERO(PRED(n)))
+# UNTIL_ZERO_F = lambda f: lambda n: IS_ZERO(n)(TRUE)()
+#
+# above code overloads the stack because python is eager
+# look at the false branch f(PRED(n)) (henceforth denoted g)
+# it is still being evaluated even if we want to return TRUE
+# so we need to do another eta expansion
+# g becomes lambda x: g(x)
+UNTIL_ZERO_F = lambda f: lambda n: IS_ZERO(n)(TRUE)(lambda x: f(PRED(n))(x))
+UNTIL_ZERO = Z(UNTIL_ZERO_F)
 
 
 def eval_bool(x):
