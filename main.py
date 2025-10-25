@@ -27,6 +27,12 @@ POWER = lambda m: lambda n: n(m)
 # POWER_3_2 = lambda f: lambda x: THREE(THREE)(f)(x)
 # compose three with three to get 3^3
 
+SUCC = lambda n: lambda f: lambda x: f(n(f)(x))
+# key piece of insight is we supply a function that short circuits and forcibly returns x once
+PRED = lambda n: lambda f: lambda x: n(\
+    lambda g: lambda h: h(g(f))\
+)(lambda _: x)(lambda i:i)
+
 
 def eval_bool(x):
     return x(True)(False)

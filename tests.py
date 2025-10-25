@@ -61,6 +61,13 @@ class TestNumLambda(unittest.TestCase):
         self.check(main.POWER(main.FOUR)(main.TWO), 16)
         self.check(main.POWER(main.FOUR)(main.THREE), 64)
 
+    def test_pred(self):
+        self.check(main.PRED(main.ZERO), 0)
+        self.check(main.PRED(main.ONE), 0)
+        self.check(main.PRED(main.TWO), 1)
+        self.check(main.PRED(main.THREE), 2)
+        self.check(main.PRED(main.FOUR), 3)
+
     def check(self, inp, exp):
         out = main.eval_num(inp)
         self.assertEqual(exp, out)
