@@ -29,9 +29,14 @@ POWER = lambda m: lambda n: n(m)
 
 SUCC = lambda n: lambda f: lambda x: f(n(f)(x))
 # key piece of insight is we supply a function that short circuits and forcibly returns x once
+
+# fmt: off
 PRED = lambda n: lambda f: lambda x: n(\
     lambda g: lambda h: h(g(f))\
 )(lambda _: x)(lambda i:i)
+# fmt: on
+
+SUB = lambda m: lambda n: n(PRED)(m)
 
 
 def eval_bool(x):
