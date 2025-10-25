@@ -1,7 +1,7 @@
-T = lambda x: lambda y: x
-F = lambda x: lambda y: y
-AND = lambda x: lambda y: x(y, F)
-OR = lambda x: lambda y: x(T, y)
+TRUE = lambda x: lambda y: x
+FALSE = lambda x: lambda y: y
+AND = lambda x: lambda y: x(y)(FALSE)
+OR = lambda x: lambda y: x(TRUE, y)
 I = lambda x: x
 
 ZERO = lambda f: lambda x: x
@@ -24,7 +24,7 @@ HUNDRED = TIMES(TEN)(TEN)
 
 
 def eval_bool(x):
-    print(x("true")("false"))
+    return x(True)(False)
 
 
 def eval_ident(x):
@@ -33,16 +33,3 @@ def eval_ident(x):
 
 def eval_num(x):
     print(x(lambda x: x + 1)(0))
-
-
-eval_num(HUNDRED)
-
-# eval_bool(AND(T, T))
-# eval_bool(AND(T, F))
-# eval_bool(AND(F, T))
-# eval_bool(AND(F, F))
-
-# eval_bool(OR(T, T))
-# eval_bool(OR(T, F))
-# eval_bool(OR(F, T))
-# eval_bool(OR(F, F))
