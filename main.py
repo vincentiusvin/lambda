@@ -38,6 +38,8 @@ PRED = lambda n: lambda f: lambda x: n(\
 
 SUB = lambda m: lambda n: n(PRED)(m)
 
+IS_ZERO = lambda n: n(lambda _: FALSE)(TRUE)
+
 
 def eval_bool(x):
     return x(True)(False)

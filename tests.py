@@ -21,6 +21,12 @@ class TestBoolLambda(unittest.TestCase):
         self.check(main.OR(main.FALSE)(main.TRUE), True)
         self.check(main.OR(main.FALSE)(main.FALSE), False)
 
+    def test_is_zero(self):
+        self.check(main.IS_ZERO(main.ZERO), True)
+        self.check(main.IS_ZERO(main.ONE), False)
+        self.check(main.IS_ZERO(main.TWO), False)
+        self.check(main.IS_ZERO(main.THREE), False)
+
     def check(self, inp, exp):
         out = main.eval_bool(inp)
         self.assertEqual(exp, out)
