@@ -15,6 +15,10 @@ class TestBoolLambda(unittest.TestCase):
         self.check(main.AND(main.FALSE)(main.TRUE), False)
         self.check(main.AND(main.FALSE)(main.FALSE), False)
 
+    def test_not(self):
+        self.check(main.NOT(main.TRUE), False)
+        self.check(main.NOT(main.FALSE), True)
+
     def test_or(self):
         self.check(main.OR(main.TRUE)(main.TRUE), True)
         self.check(main.OR(main.TRUE)(main.FALSE), True)

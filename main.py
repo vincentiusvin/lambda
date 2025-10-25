@@ -1,6 +1,7 @@
 TRUE = lambda x: lambda y: x
 FALSE = lambda x: lambda y: y
 AND = lambda x: lambda y: x(y)(FALSE)
+NOT = lambda x: x(FALSE)(TRUE)
 OR = lambda x: lambda y: x(TRUE)(y)
 
 ZERO = lambda f: lambda x: x
