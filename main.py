@@ -1,8 +1,7 @@
 TRUE = lambda x: lambda y: x
 FALSE = lambda x: lambda y: y
 AND = lambda x: lambda y: x(y)(FALSE)
-OR = lambda x: lambda y: x(TRUE, y)
-I = lambda x: x
+OR = lambda x: lambda y: x(TRUE)(y)
 
 ZERO = lambda f: lambda x: x
 ONE = lambda f: lambda x: f(x)
@@ -11,7 +10,7 @@ SUCC = lambda n: lambda f: lambda x: f(n(f)(x))
 # SUCC = lambda n: PLUS(ONE)(n)
 
 # notice the n(f)(x). It's basically identity for numbers
-I_NUM = lambda n: lambda f: lambda x: n(f)(x)
+# I_NUM = lambda n: lambda f: lambda x: n(f)(x)
 
 TWO = SUCC(ONE)
 THREE = SUCC(TWO)
@@ -27,9 +26,5 @@ def eval_bool(x):
     return x(True)(False)
 
 
-def eval_ident(x):
-    print(x("identity"))
-
-
 def eval_num(x):
-    print(x(lambda x: x + 1)(0))
+    return x(lambda x: x + 1)(0)
