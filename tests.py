@@ -88,5 +88,10 @@ class TestNumLambda(unittest.TestCase):
         self.assertEqual(exp, out)
 
 
+class TestLoop(unittest.TestCase):
+    def test_loop(self):
+        self.assertRaises(RecursionError, lambda: main.LOOP_FACTORY(None))
+
+
 if __name__ == "__main__":
     unittest.main()

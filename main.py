@@ -41,6 +41,13 @@ SUB = lambda m: lambda n: n(PRED)(m)
 
 IS_ZERO = lambda n: n(lambda _: FALSE)(TRUE)
 
+# because we want to run this on demand, wrap it in another lambda
+# a pure implementation has no outer lambda though
+# LOOP = (lambda x: x(x))(lambda x: x(x))
+LOOP_FACTORY = lambda _: (lambda x: x(x))(lambda x: x(x))
+
+# Y = lambda f: lambda x: f(x)(x)
+
 
 def eval_bool(x):
     return x(True)(False)
